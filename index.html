@@ -27,7 +27,19 @@
                 for(var i=0;i<=14;i++){
                     var weatherdata=data[1].time[i];
                     var weatherdescription=data[10].time[i];
-                    inner.innerHTML+="<div><b>日期:"+weatherdata.startTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br>簡短描述: "+ weatherdescription.elementValue[0].value+"</br></br></div>";
+                    var weatherimg;
+                    if(weatherdescription.elementValue[0].value.indexOf("晴時多雲")!=-1){
+                        weatherimg="cloudy.png";
+                    }else if(weatherdescription.elementValue[0].value.indexOf("多雲")!=-1){
+                        weatherimg="cloud.png";
+                    }else if(weatherdescription.elementValue[0].value.indexOf("晴天")!=-1){
+                        weatherimg="sun.png";
+                    }else if(weatherdescription.elementValue[0].value.indexOf("多雲時晴")!=-1){
+                        weatherimg="cloudy(1).png";
+                    }else{
+                        weatherimg="raining.png";
+                    }
+                    inner.innerHTML+="<div><b>日期:"+weatherdata.startTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br>簡短描述: "+ weatherdescription.elementValue[0].value+"<img src='./image/"+ weatherimg+"' width='30' height='30'></br></div>";
                 }
                 
             }
@@ -61,7 +73,7 @@
     <body>
         
 
-    <h1>這邊我會放置任何我想追蹤的圖表</h1>
+    <h3>這邊我會放置任何我想追蹤的圖表</h3>
     <h3>未來7天 天氣</h3>
     <div class="container" style="height: 400px; min-width: 310px"></div>
     
