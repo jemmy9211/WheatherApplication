@@ -3,7 +3,43 @@
     <head>
         <title>
         </title>
-        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <style>
+            body{
+                background-color:#E2EAF3;
+            }
+            h3{
+                font-family: Arial, Helvetica, sans-serif;
+                color: white;
+                background-color: #2F73FE;
+                padding: 10px;
+                align-items: center;
+                border-radius: 5px;
+                position: sticky;
+                top: 0;
+                z-index: 999;
+            }
+            
+            .container{
+                background-color: #1F255E;
+                color: white;
+                height: fit-content;
+                border-radius: 5px;
+                padding: 10px;
+            }
+            b{
+                color: #CCDCE9;
+            }
+        </style>
+    </head>
+
+    <body>
+    <h3><img src="./image/weather.png" width='30' height='30'>            WEATHER天氣預報</br></br>未來7天 天氣(資料來自中央氣象局API 每日更新)</h3>
+    <canvas id="myChart" style="width:100%;max-width:1200px"></canvas>
+    <div class="container" ></div>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         <script>
             $.ajax({
                 url:'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-373C6328-6BF2-41B3-BB3B-147802B82875&format=JSON&locationName=&elementName=&sort=time',
@@ -14,9 +50,11 @@
                     data = res.records.locations[0].location[6].weatherElement;
                     console.log(data);
                     updateweather();
+                    charting();
                 }
             })
-
+            var xValues=[];
+            var yValues=[];
             function updateweather(){
                 var inner=document.querySelector('.container');
                 for(var i=0;i<=14;i++){
@@ -34,40 +72,34 @@
                     }else{
                         weatherimg="raining.png";
                     }
-                    inner.innerHTML+="<b>日期:"+weatherdata.startTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br>簡短描述: "+ weatherdescription.elementValue[0].value+"<img src='./image/"+ weatherimg+"' width='30' height='30'></br></br>";
+                    yValues.push(weatherdata.elementValue[0].value);
+                    xValues.push(weatherdata.startTime+" to "+weatherdata.endTime);
+                    inner.innerHTML+="<b>日期:"+weatherdata.startTime+" to "+weatherdata.endTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br>簡短描述: "+ weatherdescription.elementValue[0].value+"<img src='./image/"+ weatherimg+"' width='30' height='30'></br></br>";
                 }
                 
-            }
+            };
+            function charting(){
+                console.log(xValues);
+                new Chart("myChart", {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yValues
+                    }]
+                },
+                options: {
+                    legend: {display: false},
+                    scales: {
+                    yAxes: [{ticks: {min: 10, max:35}}],
+                    }
+                }
+                });
+            };
+            
         </script>
-        <style>
-            body{
-                background-color:#E2EAF3;
-            }
-            h3{
-                color: white;
-                background-color: #2F73FE;
-                padding: 10px;
-                align-items: center;
-                border-radius: 5px;
-                position:sticky;
-                top:0;
-            }
-            div{
-                background-color: #1F255E;
-                color: white;
-                height: fit-content;
-                border-radius: 5px;
-                padding: 10px;
-            }
-            b{
-                color: #CCDCE9;
-            }
-        </style>
-    </head>
-
-    <body>
-    <h3>這邊我會放置任何我想追蹤的圖表</h3>
-    <h3>未來7天 天氣</h3>
-    <div class="container" ></div>
-    </body>
 </html>
