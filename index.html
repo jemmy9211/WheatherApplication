@@ -3,12 +3,7 @@
     <head>
         <title>
         </title>
-        <script src="https://code.highcharts.com/stock/highstock.js"></script>
-        <script src="https://code.highcharts.com/stock/modules/data.js"></script>
-        <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-        <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-
         <script>
             $.ajax({
                 url:'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-373C6328-6BF2-41B3-BB3B-147802B82875&format=JSON&locationName=&elementName=&sort=time',
@@ -39,7 +34,7 @@
                     }else{
                         weatherimg="raining.png";
                     }
-                    inner.innerHTML+="<div><b>日期:"+weatherdata.startTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br>簡短描述: "+ weatherdescription.elementValue[0].value+"<img src='./image/"+ weatherimg+"' width='30' height='30'></br></div>";
+                    inner.innerHTML+="<b>日期:"+weatherdata.startTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br>簡短描述: "+ weatherdescription.elementValue[0].value+"<img src='./image/"+ weatherimg+"' width='30' height='30'></br></br>";
                 }
                 
             }
@@ -64,20 +59,17 @@
                 border-radius: 5px;
             }
             div{
-                background-color:lightsteelblue ;
+                background-image: url('./image/back.jpg');
+                background-repeat: repeat;
+                color: white;
+                height: fit-content;
             }
         </style>
     </head>
 
-
     <body>
-        
-
     <h3>這邊我會放置任何我想追蹤的圖表</h3>
     <h3>未來7天 天氣</h3>
-    <div class="container" style="height: 400px; min-width: 310px"></div>
-    
-
-    
+    <div class="container" ></div>
     </body>
 </html>
