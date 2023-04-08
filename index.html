@@ -2,85 +2,35 @@
 <html>
     <head>
         <title>
-
         </title>
         <script src="https://code.highcharts.com/stock/highstock.js"></script>
         <script src="https://code.highcharts.com/stock/modules/data.js"></script>
         <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
         <script>
-            var seriesOptions = [],
-            seriesCounter = 0,
-            names = ['MSFT', 'GOOG'];
-
-            /**
-             * Create the chart when all data is loaded
-             * @returns {undefined}
-             */
-            function createChart() {
-
-            Highcharts.stockChart('container', {
-
-                rangeSelector: {
-                selected: 4
-                },
-
-                yAxis: {
-                labels: {
-                    formatter: function () {
-                    return (this.value > 0 ? ' + ' : '') + this.value + '%';
-                    }
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 2,
-                    color: 'silver'
-                }]
-                },
-
-                plotOptions: {
-                series: {
-                    compare: 'percent',
-                    showInNavigator: true
+            $.ajax({
+                url:'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-373C6328-6BF2-41B3-BB3B-147802B82875&format=JSON&locationName=&elementName=&sort=time',
+                method: "GET",
+                datatype:"json",
+                success: function(res){
+                    console.log(res);
+                    data = res.records.locations[0].location[6].weatherElement;
+                    console.log(data);
+                    updateweather();
                 }
-                },
+            })
 
-                tooltip: {
-                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
-                valueDecimals: 2,
-                split: true
-                },
-
-                series: seriesOptions
-            });
-            }
-
-            function success(data) {
-                var name = this.url.match(/(msft|aapl|goog)/)[0].toUpperCase();
-                var i = names.indexOf(name);
-                seriesOptions[i] = {
-                    name: name,
-                    data: data
-                };
-
-                // As we're loading the data asynchronously, we don't know what order it
-                // will arrive. So we keep a counter and create the chart when all the data is loaded.
-                seriesCounter += 1;
-
-                if (seriesCounter === names.length) {
-                    createChart();
+            function updateweather(){
+                var inner=document.querySelector('.container');
+                for(var i=0;i<=14;i++){
+                    var weatherdata=data[1].time[i];
+                    var weatherdescription=data[10].time[i];
+                    inner.innerHTML+="<div><b>日期:"+weatherdata.startTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br>簡短描述: "+ weatherdescription.elementValue[0].value+"</br></br></div>";
                 }
+                
             }
-
-            Highcharts.getJSON(
-                'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/msft-c.json',
-                success
-            );
-            
-            Highcharts.getJSON(
-            'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/goog-c.json',
-            success
-            );
         </script>
         <style>
             h1{
@@ -101,14 +51,20 @@
                 align-items: center;
                 border-radius: 5px;
             }
+            div{
+                background-color:lightsteelblue ;
+            }
         </style>
     </head>
+
+
     <body>
         
 
     <h1>這邊我會放置任何我想追蹤的圖表</h1>
-    <h3>股市價格圖</h3>
-    <div id="container" style="height: 400px; min-width: 310px"></div>
+    <h3>未來7天 天氣</h3>
+    <div class="container" style="height: 400px; min-width: 310px"></div>
+    
 
     
     </body>
