@@ -38,71 +38,74 @@
     <div class="container" ><b>文字預報</b> </br></br></div>
     </body>
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-        <script>
-            $.ajax({
-                url:'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-373C6328-6BF2-41B3-BB3B-147802B82875&format=JSON&locationName=&elementName=&sort=time',
-                method: "GET",
-                datatype:"json",
-                success: function(res){
-                    console.log(res);
-                    data = res.records.locations[0].location[6].weatherElement;
-                    console.log(data);
-                    updateweather();
-                    charting();
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script>
+        $.ajax({
+            url:'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-373C6328-6BF2-41B3-BB3B-147802B82875&format=JSON&locationName=&elementName=&sort=time',
+            method: "GET",
+            datatype:"json",
+            success: function(res){
+                console.log(res);
+                data = res.records.locations[0].location[6].weatherElement;
+                console.log(data);
+                updateweather();
+                charting();
+            }
+        });
+        
+        var xValues=[];
+        var yValues=[];
+        function updateweather(){
+            var inner=document.querySelector('.container');
+            for(var i=0;i<=data[1].time.length-1;i++){
+                var weatherdata=data[1].time[i];
+                console.log(data[1].time.length);
+                var weatherdescription=data[10].time[i];
+                var weatherimg="";
+                if(weatherdescription.elementValue[0].value.indexOf("晴時多雲")!=-1){
+                    weatherimg="cloudy.png";
+                }else if(weatherdescription.elementValue[0].value.indexOf("多雲")!=-1){
+                    weatherimg="cloud.png";
+                }else if(weatherdescription.elementValue[0].value.indexOf("晴天")!=-1){
+                    weatherimg="sun.png";
+                }else if(weatherdescription.elementValue[0].value.indexOf("多雲時晴")!=-1){
+                    weatherimg="cloudy(1).png";
+                }else{
+                    weatherimg="raining.png";
                 }
-            })
-            var xValues=[];
-            var yValues=[];
-            function updateweather(){
-                var inner=document.querySelector('.container');
-                for(var i=0;i<=14;i++){
-                    var weatherdata=data[1].time[i];
-                    var weatherdescription=data[10].time[i];
-                    var weatherimg;
-                    if(weatherdescription.elementValue[0].value.indexOf("晴時多雲")!=-1){
-                        weatherimg="cloudy.png";
-                    }else if(weatherdescription.elementValue[0].value.indexOf("多雲")!=-1){
-                        weatherimg="cloud.png";
-                    }else if(weatherdescription.elementValue[0].value.indexOf("晴天")!=-1){
-                        weatherimg="sun.png";
-                    }else if(weatherdescription.elementValue[0].value.indexOf("多雲時晴")!=-1){
-                        weatherimg="cloudy(1).png";
-                    }else{
-                        weatherimg="raining.png";
-                    }
-                    yValues.push(weatherdata.elementValue[0].value);
-                    xValues.push(weatherdata.startTime+" to "+weatherdata.endTime);
-                    inner.innerHTML+="<b>日期:"+weatherdata.startTime+" to "+weatherdata.endTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br>簡短描述: "+ weatherdescription.elementValue[0].value+"<img src='./image/"+ weatherimg+"' width='30' height='30'></br></br>";
-                }
-                
-            };
-            function charting(){
-                new Chart("myChart", {
-                    type: "line",
-                    data: {
-                        labels: xValues,
-                        datasets: [{
-                            label: '平均溫度:',
-                            fill: false,
-                            lineTension: 0,
-                            backgroundColor: "rgba(108, 207, 218,1.0)",
-                            borderColor: "rgba(119, 247, 80,1.0)",
-                            data: yValues,
-                            pointStyle: 'circle',
-                            pointRadius: 10,
-                            pointHoverRadius: 15
-                        }]
-                    },
-                    options: {
-                        legend: {display: true},
-                        scales: {
-                        yAxes: [{ticks: {min: 10, max:35}}],
-                        }
-                    }
-                });
-            };
+                yValues.push(weatherdata.elementValue[0].value);
+                xValues.push(weatherdata.startTime+" to "+weatherdata.endTime);
+                inner.innerHTML+="<b>日期:"+weatherdata.startTime+" to "+weatherdata.endTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br>簡短描述: "+ weatherdescription.elementValue[0].value+"<img src='./image/"+ weatherimg+"' width='30' height='30'></br></br>";
+            }
             
-        </script>
+        };
+        
+        function charting(){
+            new Chart("myChart", {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        label: '平均溫度:',
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgba(108, 207, 218,1.0)",
+                        borderColor: "rgba(119, 247, 80,1.0)",
+                        data: yValues,
+                        pointStyle: 'circle',
+                        pointRadius: 10,
+                        pointHoverRadius: 15
+                    }]
+                },
+                options: {
+                    legend: {display: true},
+                    scales: {
+                    yAxes: [{ticks: {min: 10, max:35}}],
+                    }
+                }
+            });
+        };
+        
+    </script>
 </html>
