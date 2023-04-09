@@ -83,7 +83,7 @@
                     weatherimg="raining.png";
                 }
                 yValues.push(weatherdata.elementValue[0].value);
-                xValues.push(weatherdata.startTime+" to "+weatherdata.endTime);
+                xValues.push(weatherdata.startTime.substr(8, 5)+" to "+weatherdata.endTime.substr(8, 5));
                 inner.innerHTML+="<b>日期:"+weatherdata.startTime+" to "+weatherdata.endTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br>簡短描述: "+ weatherdescription.elementValue[0].value+"<img src='./image/"+ weatherimg+"' width='30' height='30'></br></br>";
             }
             
