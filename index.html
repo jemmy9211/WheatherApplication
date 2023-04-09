@@ -20,6 +20,7 @@
                 position: sticky;
                 top: 0;
                 z-index: 999;
+                overflow: hidden;
             }
             
             .container{
@@ -37,13 +38,37 @@
                 align-items: center;
                 border-radius: 20px;
             }
+            .mainbuttom{
+                background-color: #E2EAF3; 
+                border: none;
+                color: black;
+                padding: 10px 30px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                position:relative;
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+                border-radius: 15px;
+            }
+            b{
+                font-family: Arial, Helvetica, sans-serif;
+                color: black;
+                background-color: #B3F0FE;
+                padding: 5px;
+                align-items: center;
+                border-radius: 5px;
+            }
         </style>
     </head>
 
     <body>
-    <h3><img src="./image/weather.png" width='30' height='30'>            WEATHER天氣預報</br></br>未來7天 天氣(資料來自中央氣象局API 每日更新)</h3>
+    <h3><img src="./image/weather.png" width='30' height='30'>            WEATHER天氣預報&nbsp&nbsp&nbsp&nbsp<input class="mainbuttom" type ="button" style="float: right;" onclick="javascript:location.href='https://jemmy9211.github.io/'" value="回到 jemmy 首頁"></input></br></br>未來7天 天氣(資料來自中央氣象局API 每日更新)</h3>
     <canvas id="myChart" style="width:100%;max-width:1200px"></canvas>
     <div class="container" ><h4>文字預報</h4></div>
+    <br><b>2023/4/9 design by jemmy &nbsp&nbsp&nbsp Email:jemmy9211@gmail.com</b>
     </body>
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -84,7 +109,7 @@
                 }
                 yValues.push(weatherdata.elementValue[0].value);
                 xValues.push(weatherdata.startTime.substr(8, 5)+" to "+weatherdata.endTime.substr(8, 5));
-                inner.innerHTML+="<b>日期:"+weatherdata.startTime+" to "+weatherdata.endTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br>簡短描述: "+ weatherdescription.elementValue[0].value+"<img src='./image/"+ weatherimg+"' width='30' height='30'></br></br>";
+                inner.innerHTML+="<b>日期:"+weatherdata.startTime+" to "+weatherdata.endTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br><b>簡短描述:</b> "+ weatherdescription.elementValue[0].value+"<img src='./image/"+ weatherimg+"' width='30' height='30'></br></br>";
             }
             
         };
