@@ -72,6 +72,12 @@
                 border-width:3px;
                 border-color: #1f255ee5;
             }
+            .centerdiv{
+                text-align: center;
+            }
+            canvas{
+                margin: auto;
+            }
         </style>
     </head>
 
@@ -89,9 +95,11 @@
         <option class="drop-down">臺北市</option>
         <option class="drop-down">臺中市</option>
       </select>
+    <div class="centerdiv">
     <canvas id="myChart" style="width:100%;max-width:1200px"></canvas>
     <canvas id="myChart2" style="width:50%;max-width:1000px"></canvas>
     <canvas id="myChart3" style="width:50%;max-width:700px"></canvas>
+    </div>
     <div class="container" ><h4>文字預報</h4><div id='ele'></div></div>
     <br><b>2023/4/9 design by jemmy &nbsp&nbsp&nbsp Email:jemmy9211@gmail.com</b>
     </body>
@@ -263,6 +271,11 @@
                     },
                     options: {
                         legend: {display: true},
+                        title: {
+                            display: true,
+                            text: '最高最低溫',
+                            fontSize:20
+                        },
                         scales: {
                             xAxes: [{
                                 display: true,
@@ -285,6 +298,11 @@
                     },
                     options: {
                         legend: {display: true},
+                        title: {
+                            display: true,
+                            text: '紫外線指數',
+                            fontSize:20
+                        },
                         scales: {
                             xAxes: [{
                                 display: true,
