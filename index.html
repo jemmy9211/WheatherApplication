@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>
-        </title>
+        <title>Wheather</title>
         <style>
             body{
                 background-color:#E2EAF3;
@@ -61,36 +60,104 @@
                 align-items: center;
                 border-radius: 5px;
             }
+            select{
+                background-color: #2F73FE;
+                color: white;
+                padding: 8px 25px;
+                font-family: Arial, Helvetica, sans-serif;
+                align-items: center;
+                font-size: 16px;
+                border-style: solid;
+                border-radius: 5px;
+                border-width:3px;
+                border-color: #1f255ee5;
+            }
         </style>
     </head>
 
-    <body>
+    <body class="bb">
     <h3><img src="./image/weather.png" width='30' height='30'>            WEATHER天氣預報&nbsp&nbsp&nbsp&nbsp<input class="mainbuttom" type ="button" style="float: right;" onclick="javascript:location.href='https://jemmy9211.github.io/'" value="回到 jemmy 首頁"></input></br></br>未來7天 天氣(資料來自中央氣象局API 每日更新)</h3>
+    
+    <select id="list">
+        <option class="drop-down">新竹縣</option>
+        <option class="drop-down">金門縣</option>
+        <option class="drop-down">新竹市</option>
+        <option class="drop-down">新北市</option>
+        <option class="drop-down">宜蘭縣</option>
+        <option class="drop-down" selected="selected">臺南市</option>
+        <option class="drop-down">高雄市</option>
+        <option class="drop-down">臺北市</option>
+        <option class="drop-down">臺中市</option>
+      </select>
     <canvas id="myChart" style="width:100%;max-width:1200px"></canvas>
-    <div class="container" ><h4>文字預報</h4></div>
+    <canvas id="myChart2" style="width:50%;max-width:1000px"></canvas>
+    <div class="container" ><h4>文字預報</h4><div id='ele'></div></div>
     <br><b>2023/4/9 design by jemmy &nbsp&nbsp&nbsp Email:jemmy9211@gmail.com</b>
     </body>
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script>
-        $.ajax({
+        var xValues=[];
+        var yValues=[];
+        var xValues1=[];
+        var yValues1=[];
+        var xValues2=[];
+        var yValues2=[];
+        var locvationname='臺南市';
+        var lacationnum=6;
+        mainstream(lacationnum);
+        document.getElementById('list').onchange = function() {
+            if(this.value=='臺中市'){
+                lacationnum=20;
+            }else if(this.value=='臺北市'){
+                lacationnum=9;
+            }else if(this.value=='高雄市'){
+                lacationnum=7;
+            }else if(this.value=='臺南市'){
+                lacationnum=6;
+            }else if(this.value=='宜蘭縣'){
+                lacationnum=4;
+            }else if(this.value=='新北市'){
+                lacationnum=3;
+            }else if(this.value=='新竹市'){
+                lacationnum=21;
+            }else if(this.value=='金門縣'){
+                lacationnum=1;
+            }else if(this.value=='新竹縣'){
+                lacationnum=0;
+            }
+            console.log(lacationnum);
+            mainstream(lacationnum);
+        }
+        function mainstream(lacationnum){
+            $.ajax({
             url:'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-373C6328-6BF2-41B3-BB3B-147802B82875&format=JSON&locationName=&elementName=&sort=time',
             method: "GET",
             datatype:"json",
             success: function(res){
                 console.log(res);
-                data = res.records.locations[0].location[6].weatherElement;
+                data = res.records.locations[0].location[lacationnum].weatherElement;
+                console.log(res.records.locations[0].location[lacationnum].locationName);
                 console.log(data);
                 updateweather();
                 charting();
             }
-        });
-        
-        var xValues=[];
-        var yValues=[];
+            });
+        };
         function updateweather(){
-            var inner=document.querySelector('.container');
+            var inner=document.querySelector('#ele');
+            xValues=[];
+            yValues=[];
+            xValues1=[];
+            yValues1=[];
+            xValues2=[];
+            yValues2=[];
+            const element = document.getElementById("ele");
+            element.remove();
+            var outer=document.querySelector('.container');
+            outer.innerHTML+="<div id='ele'>";
+            innerb=document.querySelector('#ele');
             for(var i=0;i<=data[1].time.length-1;i++){
                 var weatherdata=data[1].time[i];
                 console.log(data[1].time.length);
@@ -107,10 +174,16 @@
                 }else{
                     weatherimg="raining.png";
                 }
+                
                 yValues.push(weatherdata.elementValue[0].value);
                 xValues.push(weatherdata.startTime.substr(8, 5)+" to "+weatherdata.endTime.substr(8, 5));
-                inner.innerHTML+="<b>日期:"+weatherdata.startTime+" to "+weatherdata.endTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br><br><b>簡短描述:</b> "+ weatherdescription.elementValue[0].value+"<img src='./image/"+ weatherimg+"' width='35' height='35'><br>==========================><br><br>";
+                xValues1.push(data[12].time[i].startTime.substr(8, 5)+" to "+weatherdata.endTime.substr(8, 5));
+                yValues1.push(data[12].time[i].elementValue[0].value);
+                xValues2.push(data[8].time[i].startTime.substr(8, 5)+" to "+weatherdata.endTime.substr(8, 5));
+                yValues2.push(data[8].time[i].elementValue[0].value);
+                innerb.innerHTML+="<b>日期:"+weatherdata.startTime+" to "+weatherdata.endTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br><br><b>簡短描述:</b> "+ weatherdescription.elementValue[0].value+"<img src='./image/"+ weatherimg+"' width='35' height='35'><br>==========================><br><br>";
             }
+            outer.innerHTML+="</div>";
             
         };
         
@@ -126,6 +199,39 @@
                         backgroundColor: "rgba(235, 40, 48, 0.8)",
                         borderColor: "rgba(39, 116, 245, 0.91)",
                         data: yValues,
+                        pointStyle: 'circle',
+                        pointRadius: 10,
+                        pointHoverRadius: 15
+                    }]
+                },
+                options: {
+                    legend: {display: true},
+                    scales: {
+                    yAxes: [{ticks: {min: 10, max:35}}],
+                    }
+                }
+            });
+            new Chart("myChart2", {
+                type: "line",
+                data: {
+                    labels: xValues1,
+                    datasets: [{
+                        label: '最高溫度:',
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgba(235, 40, 48, 0.8)",
+                        borderColor: "rgba(235, 40, 48, 0.8)",
+                        data: yValues1,
+                        pointStyle: 'circle',
+                        pointRadius: 10,
+                        pointHoverRadius: 15
+                    },{
+                        label: '最低溫度:',
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgba(39, 116, 245, 0.91)",
+                        borderColor: "rgba(39, 116, 245, 0.91)",
+                        data: yValues2,
                         pointStyle: 'circle',
                         pointRadius: 10,
                         pointHoverRadius: 15
