@@ -91,7 +91,7 @@
       </select>
     <canvas id="myChart" style="width:100%;max-width:1200px"></canvas>
     <canvas id="myChart2" style="width:50%;max-width:1000px"></canvas>
-    <canvas id="myChart3" style="width:50%;max-width:1000px"></canvas>
+    <canvas id="myChart3" style="width:50%;max-width:700px"></canvas>
     <div class="container" ><h4>文字預報</h4><div id='ele'></div></div>
     <br><b>2023/4/9 design by jemmy &nbsp&nbsp&nbsp Email:jemmy9211@gmail.com</b>
     </body>
@@ -272,19 +272,15 @@
                     }
                 });
                 myChart3 = new Chart("myChart3", {
-                    type: "line",
+                    type: "bar",
                     data: {
                         labels: xValues3,
                         datasets: [{
-                            label: '紫外線:',
-                            fill: false,
-                            lineTension: 0,
+                            label: '紫外線指數:',
                             backgroundColor: "rgb(177, 61, 255)",
                             borderColor: "rgb(177, 61, 255)  ",
                             data: yValues3,
-                            pointStyle: 'circle',
-                            pointRadius: 10,
-                            pointHoverRadius: 15
+                            borderWidth:10
                         }]
                     },
                     options: {
