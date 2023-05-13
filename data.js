@@ -41,6 +41,7 @@ function mainstream(lacationnum){
     success: function(res){
         console.log(res);
         data = res.records.locations[0].location[lacationnum].weatherElement;
+        data1 = res.records.locations[0].location;
         console.log(res.records.locations[0].location[lacationnum].locationName);
         console.log(data);
         updateweather();
@@ -59,6 +60,8 @@ function updateweather(){
     yValues2=[];
     xValues3=[];
     yValues3=[];
+    xValues4=[];
+    yValues4=[];
     const element = document.getElementById("ele");
     element.remove();
     var outer=document.querySelector('.container');
@@ -99,10 +102,17 @@ function updateweather(){
         xValues2.push(data[8].time[i].startTime.substr(8, 5)+" to "+weatherdata.endTime.substr(8, 5));
         yValues2.push(data[8].time[i].elementValue[0].value);
     }
+    xValues4.push(data1[6].weatherElement[0].time[0].elementValue[0].value);
+    xValues4.push(data1[20].weatherElement[0].time[0].elementValue[0].value);
+    xValues4.push(data1[21].weatherElement[0].time[0].elementValue[0].value);
+    xValues4.push(data1[9].weatherElement[0].time[0].elementValue[0].value);
+    xValues4.push(data1[3].weatherElement[0].time[0].elementValue[0].value);
+    xValues4.push(data1[7].weatherElement[0].time[0].elementValue[0].value);
 };
 var myChart;
 var myChart3;
 var myChart2;
+var myChart4;
 function charting(){
     if(flag==0){
         myChart = new Chart("myChart", {
@@ -199,6 +209,47 @@ function charting(){
                         display: true,
                     }],
                     yAxes: [{ticks: {min: 0, max:15}}],
+                }
+            }
+        });
+        myChart4 = new Chart("myChart4", {
+            type: 'pie',
+            data: {
+                labels: [
+                    '台南市',
+                    '台中市',
+                    '新竹市',
+                    '台北市',
+                    '新北市',
+                    '高雄市'
+                ],
+                datasets: [{
+                    label: '',
+                    data: xValues4,
+                    backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(102, 255, 178)',
+                    'rgb(255, 178, 102)',
+                    'rgb(178, 102, 255)'
+                    ],
+                    hoverOffset: 6
+                }]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: true,
+                title: {
+                    display: true,
+                    text: '12小時內降雨機率比較',
+                    fontSize:20
+                },
+                plugins: {
+                    labels: {
+                        render: 'percentage',
+                        precision: 2
+                    }
                 }
             }
         });

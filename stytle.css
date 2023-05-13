@@ -83,3 +83,9 @@ select{
 canvas{
     margin: auto;
 }
+#myChart3{
+    float: left;
+}
+#myChart4{
+    float: left;
+}
