@@ -104,12 +104,12 @@ function updateweather(){
         xValues2.push(data[8].time[i].startTime.substr(8, 5)+" to "+weatherdata.endTime.substr(8, 5));
         yValues2.push(data[8].time[i].elementValue[0].value);
     }
-    rarray1=[6,20,21,9,3,7];
-    rarray2=['台南市','台中市','新竹市','台北市','新北市','高雄市'];
+    rarray1=[6,20,21,9,3,7,4,1,0];
+    rarray2=['台南市','台中市','新竹市','台北市','新北市','高雄市','宜蘭縣','金門縣','新竹縣'];
     var k= rnum;
-    for(var i=0;i<6;i++){
-        if(k==6){
-            k=k%6;
+    for(var i=0;i<9;i++){
+        if(k==9){
+            k=k%9;
         }
         xValues4.push(data1[rarray1[k]].weatherElement[0].time[0].elementValue[0].value);
         yValues4.push(rarray2[k]);
@@ -238,7 +238,10 @@ function charting(){
                     'rgb(255, 205, 86)',
                     'rgb(102, 255, 178)',
                     'rgb(255, 178, 102)',
-                    'rgb(178, 102, 255)'
+                    'rgb(178, 102, 255)',
+                    'rgb(102, 255, 255)',
+                    'rgb(160, 160, 160)',
+                    'rgb(255, 255, 102)'
                     ],
                     hoverOffset: 6
                 }]
@@ -254,7 +257,7 @@ function charting(){
                 plugins: {
                     labels: {
                         render: 'percentage',
-                        precision: 2
+                        precision: 3
                     }
                 }
             }
