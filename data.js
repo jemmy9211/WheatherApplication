@@ -9,6 +9,7 @@ var yValues3=[];
 var locvationname='臺南市';
 var lacationnum=6;
 var flag=0;
+var rnum=0;
 mainstream(lacationnum);
 document.getElementById('list').onchange = function() {
     if(this.value=='臺中市'){
@@ -44,6 +45,7 @@ function mainstream(lacationnum){
         data1 = res.records.locations[0].location;
         console.log(res.records.locations[0].location[lacationnum].locationName);
         console.log(data);
+        rnum=getRandomInt(0,6);
         updateweather();
         charting();
         flag++;
@@ -102,17 +104,28 @@ function updateweather(){
         xValues2.push(data[8].time[i].startTime.substr(8, 5)+" to "+weatherdata.endTime.substr(8, 5));
         yValues2.push(data[8].time[i].elementValue[0].value);
     }
-    xValues4.push(data1[6].weatherElement[0].time[0].elementValue[0].value);
-    xValues4.push(data1[20].weatherElement[0].time[0].elementValue[0].value);
-    xValues4.push(data1[21].weatherElement[0].time[0].elementValue[0].value);
-    xValues4.push(data1[9].weatherElement[0].time[0].elementValue[0].value);
-    xValues4.push(data1[3].weatherElement[0].time[0].elementValue[0].value);
-    xValues4.push(data1[7].weatherElement[0].time[0].elementValue[0].value);
+    rarray1=[6,20,21,9,3,7];
+    rarray2=['台南市','台中市','新竹市','台北市','新北市','高雄市'];
+    var k= rnum;
+    for(var i=0;i<6;i++){
+        if(k==6){
+            k=k%6;
+        }
+        xValues4.push(data1[rarray1[k]].weatherElement[0].time[0].elementValue[0].value);
+        yValues4.push(rarray2[k]);
+        k++;
+        
+    }
 };
 var myChart;
 var myChart3;
 var myChart2;
 var myChart4;
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
 function charting(){
     if(flag==0){
         myChart = new Chart("myChart", {
@@ -215,14 +228,7 @@ function charting(){
         myChart4 = new Chart("myChart4", {
             type: 'pie',
             data: {
-                labels: [
-                    '台南市',
-                    '台中市',
-                    '新竹市',
-                    '台北市',
-                    '新北市',
-                    '高雄市'
-                ],
+                labels: yValues4,
                 datasets: [{
                     label: '',
                     data: xValues4,
@@ -242,7 +248,7 @@ function charting(){
                 maintainAspectRatio: true,
                 title: {
                     display: true,
-                    text: '12小時內降雨機率比較',
+                    text: '12小時內降雨機率 各地區比較圓餅圖',
                     fontSize:20
                 },
                 plugins: {
@@ -263,6 +269,10 @@ function charting(){
         myChart2.update();
         myChart3.data.datasets[0].data=yValues3;
         myChart3.update();
+        myChart4.data.datasets[0].data=xValues4;
+        myChart4.update();
+        myChart4.data.labels=yValues4;
+        myChart4.update();
     }
     
     
