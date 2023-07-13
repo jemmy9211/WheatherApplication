@@ -85,8 +85,13 @@ function nowweather(lacationnum){
         console.log(lacationnum);
         console.log(sitenumber);
         nowdata=res.records.location[sitenumber];
+        const element = document.getElementById("tableinner");
+        element.remove();
+        var outertable=document.getElementById("outert");
+        outertable.innerHTML+="<tbody id='tableinner'>";
         var table=document.querySelector('#tableinner');
         table.innerHTML+="<tr><td>觀測站地點</td><td>"+nowdata.locationName+"</td></tr>";
+        outertable.innerHTML+="</tbody>";
     }
     });
 };
