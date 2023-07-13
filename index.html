@@ -2,12 +2,18 @@
 <html>
     <head>
         <title>Wheather</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./stytle.css">
     </head>
-    <body class="bb">
-    <h3><img src="./image/weather.png" width='30' height='30'>            WEATHER天氣預報&nbsp&nbsp&nbsp&nbsp<input class="mainbuttom" type ="button" style="float: right;" onclick="javascript:location.href='https://jemmy9211.github.io/'" value="回到 jemmy 首頁"></input></br></br>未來7天 天氣(資料來自中央氣象局API 每日更新)
-    <b class="liststyle" style="float: right;">選擇一個城市:
-    <select id="list">
+    
+    <body>
+    <div class="p-3 bg-primary text-white text-center sticky-top">
+    <img src="./image/weather.png" width='70' height='70'>
+    <h1>My Wheather App</h1><div class="spinner-grow text-danger"></div> 觀測中 資料來自中央氣象局<br>
+        <input class="mainbuttom" type ="button" style="float: top;" onclick="javascript:location.href='https://jemmy9211.github.io/'" value="回到 jemmy 首頁"></input>
+    <br>
+        <b class="liststyle" style="float: top;">選擇一個城市:
+        <select id="list">
         <option class="drop-down">新竹縣</option>
         <option class="drop-down">金門縣</option>
         <option class="drop-down">新竹市</option>
@@ -17,20 +23,50 @@
         <option class="drop-down">高雄市</option>
         <option class="drop-down">臺北市</option>
         <option class="drop-down">臺中市</option>
-      </select>
-    </b>
-    </h3>
-    <div class="centerdiv">
-    <canvas id="myChart3" style="width:50%;max-width:600px"></canvas>
-    <canvas id="myChart4" style="width:50%;max-width:600px"></canvas>
-    <canvas id="myChart" style="width:100%;max-width:1200px"></canvas>
-    <canvas id="myChart2" style="width:50%;max-width:1000px"></canvas>
+        </select>
+        </b>
     </div>
-    <div class="container" ><h4>文字預報</h4><div id='ele'></div></div>
-    <br><b>2023/4/9 design by jemmy &nbsp&nbsp&nbsp Email:jemmy9211@gmail.com</b>
+
+    <div class="container p-5 my-5 border">
+    目前觀測氣溫
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>項目</th>
+                <th>數值</th>
+            </tr>
+            </thead >
+            <tbody id="tableinner">
+            
+            </tbody>
+        </table>
+    </div>
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-lg-5 p-3 text-white">
+                <canvas id="myChart3" style="width:50%;max-width:600px"></canvas>
+            </div>
+            <div class="col-md-5 p-3 text-white">
+                <canvas id="myChart4" style="width:50%;max-width:600px"></canvas>
+            </div>
+            <div class="col-md-8 p-3 text-white">
+                <canvas id="myChart" style="width:100%;max-width:1200px"></canvas>
+            </div>
+            <div class="col-md-8 p-3 text-white">
+                <canvas id="myChart2" style="width:50%;max-width:1000px"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="dcontainer" ><h4>文字預報</h4><div id='ele'></div></div>
+    
+    <div class="mt-5 p-4 bg-dark text-white text-center">
+        <p>2023/4/9 design by jemmy &nbsp&nbsp&nbsp Email:jemmy9211@gmail.com</p>
+    </div>
     </body>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script src="./data.js"></script>
 </html>

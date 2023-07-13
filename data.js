@@ -10,7 +10,9 @@ var locvationname='臺南市';
 var lacationnum=6;
 var flag=0;
 var rnum=0;
+var glbalres;
 mainstream(lacationnum);
+nowweather(lacationnum);
 document.getElementById('list').onchange = function() {
     if(this.value=='臺中市'){
         lacationnum=20;
@@ -33,6 +35,7 @@ document.getElementById('list').onchange = function() {
     }
     console.log(lacationnum);
     mainstream(lacationnum);
+    nowweather(lacationnum);
 }
 function mainstream(lacationnum){
     $.ajax({
@@ -40,15 +43,51 @@ function mainstream(lacationnum){
     method: "GET",
     datatype:"json",
     success: function(res){
-        console.log(res);
+        
+        //console.log(res);
         data = res.records.locations[0].location[lacationnum].weatherElement;
         data1 = res.records.locations[0].location;
-        console.log(res.records.locations[0].location[lacationnum].locationName);
-        console.log(data);
+        //console.log(res.records.locations[0].location[lacationnum].locationName);
+        //console.log(data);
         rnum=getRandomInt(0,6);
         updateweather();
         charting();
         flag++;
+    }
+    });
+};
+function nowweather(lacationnum){
+    $.ajax({
+    url:'https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization=CWB-373C6328-6BF2-41B3-BB3B-147802B82875',
+    method: "GET",
+    datatype:"json",
+    success: function(res){
+        var sitenumber=101;
+        if(lacationnum==6){
+            sitenumber=111;
+        }else if(lacationnum==20){
+            sitenumber=31;
+        }else if(lacationnum==9){
+            sitenumber=14;
+        }else if(lacationnum==7){
+            sitenumber=24;
+        }else if(lacationnum==4){
+            sitenumber=105;
+        }else if(lacationnum==3){
+            sitenumber=45;
+        }else if(lacationnum==21){
+            sitenumber=35;
+        }else if(lacationnum==1){
+            sitenumber=116;
+        }else if(lacationnum==21){
+            sitenumber=35;
+        }
+        console.log(res);
+        console.log(lacationnum);
+        console.log(sitenumber);
+        nowdata=res.records.location[sitenumber];
+        var table=document.querySelector('#tableinner');
+        table.innerHTML+="<tr><td>觀測站地點</td><td>"+nowdata.locationName+"</td></tr>";
     }
     });
 };
@@ -66,7 +105,7 @@ function updateweather(){
     yValues4=[];
     const element = document.getElementById("ele");
     element.remove();
-    var outer=document.querySelector('.container');
+    var outer=document.querySelector('.dcontainer');
     outer.innerHTML+="<div id='ele'>";
     innerb=document.querySelector('#ele');
     for(var i=0;i<=data[1].time.length-1;i++){

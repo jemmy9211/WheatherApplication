@@ -1,5 +1,6 @@
 body{
     background-color:#E2EAF3;
+    color: white;
 }
 h3{
     font-family: Arial, Helvetica, sans-serif;
@@ -18,7 +19,7 @@ h3{
 }
 
 
-.container{
+.dcontainer{
     background-color: #1f255ee5;
     color: white;
     height: fit-content;
@@ -37,43 +38,52 @@ h4{
     background-color: #E2EAF3; 
     border: none;
     color: black;
-    padding: 10px 30px;
+    padding: 10px 10px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    position:relative;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
     border-radius: 5px;
-    width: 254px;
+    border-width:3px;
+    border-color: #1f255ee5;
+    width: 50%;
 }
 b{
     font-family: Arial, Helvetica, sans-serif;
     color: black;
     background-color: #B3F0FE;
-    padding: 5px;
     align-items: center;
     border-radius: 5px;
+    padding: 5px;
 }
 .liststyle{
     font-family: Arial, Helvetica, sans-serif;
     color: white;
     background-color: #1f255ee5;
-    padding: 5px;
+    padding: 10px 30px;
     align-items: center;
     border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    margin: 4px 2px;
+    border-width:3px;
+    border-color: #1f255ee5;
+    
+}
+.titlebar{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
 }
 select{
     background-color: #2F73FE;
     color: white;
-    padding: 8px 25px;
+    padding: 1px 3px;
     font-family: Arial, Helvetica, sans-serif;
     align-items: center;
-    font-size: 16px;
+    font-size: 10px;
     border-style: solid;
-    border-radius: 5px;
+    border-radius:5px;
     border-width:3px;
     border-color: #1f255ee5;
 }
