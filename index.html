@@ -10,8 +10,6 @@
     <div class="p-3 bg-primary text-white text-center sticky-top">
     <img src="./image/weather.png" width='50' height='50'>
     <h5>My Wheather App</h5><div class="spinner-grow text-danger"></div> 觀測中 資料來自中央氣象局<br>
-        <input class="mainbuttom" type ="button" style="float: top;" onclick="javascript:location.href='https://jemmy9211.github.io/'" value="回到 jemmy 首頁"></input>
-    <br>
         <b class="liststyle" style="float: top;">選擇一個城市:
         <select id="list">
         <option class="drop-down">新竹縣</option>
@@ -25,10 +23,11 @@
         <option class="drop-down">臺中市</option>
         </select>
         </b>
+        <input type ="button" class="btn btn-light" style="float: top;" onclick="javascript:location.href='https://jemmy9211.github.io/'" value="jemmy 首頁"></input>
     </div>
 
     <div class="container p-5 my-5 border">
-    目前觀測氣溫
+        <h5><span class="badge bg-success">目前觀測氣溫</span></h5>
         <table class="table table-striped" id="outert">
             <thead>
             <tr>
@@ -59,7 +58,7 @@
         </div>
     </div>
     <div class="container p-2 my-1 border">
-    <div class="dcontainer" ><h4>文字預報</h4><div id='ele'></div></div>
+    <div class="dcontainer" ><h4><span class="badge bg-dark">文字預報</span></h4><div id='ele'></div></div>
     </div>
     
     <div class="mt-5 p-4 bg-dark text-white text-center">

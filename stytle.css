@@ -2,21 +2,7 @@ body{
     background-color:#E2EAF3;
     color: white;
 }
-h3{
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    background-color: #2F73FE;
-    padding: 9px;
-    align-items: center;
-    border-style: solid;
-    border-radius: 5px;
-    border-width:8px;
-    border-color: #1f255ee5;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    overflow: hidden;
-}
+
 
 
 .dcontainer{
@@ -26,14 +12,7 @@ h3{
     border-radius: 5px;
     padding: 10px;
 }
-h4{
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    background-color: #2F73FE;
-    padding: 10px;
-    align-items: center;
-    border-radius: 20px;
-}
+
 .mainbuttom{
     background-color: #E2EAF3; 
     border: none;
@@ -42,11 +21,23 @@ h4{
     text-align: center;
     font-size: 16px;
     margin: 4px 2px;
-    cursor: pointer;
     border-radius: 5px;
     border-width:3px;
     border-color: #1f255ee5;
+    width: 30%;
+}
+.liststyle{
+    background-color: #1f255ee5;
+    border-width:3px;
+    border-color: #1f255ee5;
+    color: white;
+    padding: 10px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 16px;
     width: 50%;
+    margin: 4px 2px;
 }
 b{
     font-family: Arial, Helvetica, sans-serif;
@@ -56,20 +47,7 @@ b{
     border-radius: 5px;
     padding: 5px;
 }
-.liststyle{
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    background-color: #1f255ee5;
-    padding: 10px 30px;
-    align-items: center;
-    border-radius: 5px;
-    font-size: 16px;
-    width: 100%;
-    margin: 4px 2px;
-    border-width:3px;
-    border-color: #1f255ee5;
-    
-}
+
 .titlebar{
     color: white;
     font-family: Arial, Helvetica, sans-serif;

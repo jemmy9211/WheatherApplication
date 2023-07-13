@@ -133,10 +133,9 @@ function updateweather(){
         }else{
             weatherimg="raining.png";
         }
-        
         yValues.push(weatherdata.elementValue[0].value);
         xValues.push(weatherdata.startTime.substr(8, 5)+" to "+weatherdata.endTime.substr(8, 5));
-        innerb.innerHTML+="<b>日期:"+weatherdata.startTime+" to "+weatherdata.endTime+" 氣溫:"+weatherdata.elementValue[0].value+"</b><br><br><b>簡短描述:</b> "+ weatherdescription.elementValue[0].value+"<img src='./image/"+ weatherimg+"' width='35' height='35'><br>==========================><br><br>";
+        innerb.innerHTML+="<img src='./image/"+ weatherimg+"' width='35' height='35'>"+"  "+"<span class='badge bg-dark'>日期:"+weatherdata.startTime+" to "+weatherdata.endTime+" 氣溫:<span class='badge rounded-pill bg-danger'>"+weatherdata.elementValue[0].value+"</span></span><br><span class='badge bg-dark'>簡短描述:</span> "+ weatherdescription.elementValue[0].value+"<br>==========================><br><br>";
     }
     outer.innerHTML+="</div>";
     for(var i=0;i<=data[9].time.length-1;i++){
