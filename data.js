@@ -32,7 +32,7 @@ document.getElementById('list').onchange = function() {
     }else if(this.value=='新竹縣'){
         lacationnum=0;
     }
-    console.log(lacationnum);
+    //console.log(lacationnum);
     mainstream(lacationnum);
 }
 function mainstream(lacationnum){
@@ -83,7 +83,7 @@ function nowweather(lacationnum){
         }else if(lacationnum==0){
             sitenumber=35;
         }
-        console.log(res);
+        //console.log(res);
         nowdata=res.records.location[sitenumber];
         const element = document.getElementById("tableinner");
         element.remove();
