@@ -8,8 +8,8 @@
     
     <body>
     <div class="p-3 bg-primary text-white text-center sticky-top">
-    <img src="./image/weather.png" width='70' height='70'>
-    <h1>My Wheather App</h1><div class="spinner-grow text-danger"></div> 觀測中 資料來自中央氣象局<br>
+    <img src="./image/weather.png" width='50' height='50'>
+    <h5>My Wheather App</h5><div class="spinner-grow text-danger"></div> 觀測中 資料來自中央氣象局<br>
         <input class="mainbuttom" type ="button" style="float: top;" onclick="javascript:location.href='https://jemmy9211.github.io/'" value="回到 jemmy 首頁"></input>
     <br>
         <b class="liststyle" style="float: top;">選擇一個城市:
@@ -42,23 +42,23 @@
         </table>
     </div>
 
-    <div class="container-fluid mt-3">
+    <div class=".container-xl">
         <div class="row">
-            <div class="col-lg-5 p-3 text-white">
-                <canvas id="myChart3" style="width:50%;max-width:600px"></canvas>
+            <div class="col-md text-white">
+                <canvas id="myChart3" style="width:100%;max-width:600px"></canvas>
             </div>
-            <div class="col-md-5 p-3 text-white">
-                <canvas id="myChart4" style="width:50%;max-width:600px"></canvas>
-            </div>
-            <div class="col-md-8 p-3 text-white">
-                <canvas id="myChart" style="width:100%;max-width:1200px"></canvas>
-            </div>
-            <div class="col-md-8 p-3 text-white">
-                <canvas id="myChart2" style="width:50%;max-width:1000px"></canvas>
+            <div class="col-md text-white">
+                <canvas id="myChart4" style="width:100%;max-width:600px"></canvas>
             </div>
         </div>
+        <div class="col-xl text-white">
+            <canvas id="myChart" style="width:100%;max-width:1200px"></canvas>
+        </div>
+        <div class="col-xl text-white">
+            <canvas id="myChart2" style="width:100%;max-width:1000px"></canvas>
+        </div>
     </div>
-    <div class="container p-5 my-5 border">
+    <div class="container p-2 my-1 border">
     <div class="dcontainer" ><h4>文字預報</h4><div id='ele'></div></div>
     </div>
     

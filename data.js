@@ -80,10 +80,10 @@ function nowweather(lacationnum){
             sitenumber=116;
         }else if(lacationnum==21){
             sitenumber=35;
+        }else if(lacationnum==0){
+            sitenumber=35;
         }
         console.log(res);
-        console.log(lacationnum);
-        console.log(sitenumber);
         nowdata=res.records.location[sitenumber];
         const element = document.getElementById("tableinner");
         element.remove();
@@ -91,6 +91,11 @@ function nowweather(lacationnum){
         outertable.innerHTML+="<tbody id='tableinner'>";
         var table=document.querySelector('#tableinner');
         table.innerHTML+="<tr><td>觀測站地點</td><td>"+nowdata.locationName+"</td></tr>";
+        table.innerHTML+="<tr><td>觀測時間</td><td>"+nowdata.time.obsTime+"</td></tr>";
+        table.innerHTML+="<tr><td>目前氣溫</td><td>"+nowdata.weatherElement[3].elementValue+"</td></tr>";
+        table.innerHTML+="<tr><td>目前天氣描述</td><td>"+nowdata.weatherElement[20].elementValue+"</td></tr>";
+        table.innerHTML+="<tr><td>目前風速(公尺/秒)</td><td>"+nowdata.weatherElement[2].elementValue+"</td></tr>";
+        table.innerHTML+="<tr><td>相對溼度</td><td>"+nowdata.weatherElement[4].elementValue+"</td></tr>";
         outertable.innerHTML+="</tbody>";
     }
     });
