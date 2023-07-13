@@ -135,7 +135,9 @@ function updateweather(){
         }
         yValues.push(weatherdata.elementValue[0].value);
         xValues.push(weatherdata.startTime.substr(8, 5)+" to "+weatherdata.endTime.substr(8, 5));
-        innerb.innerHTML+="<img src='./image/"+ weatherimg+"' width='35' height='35'>"+"  "+"<span class='badge bg-dark'>日期:"+weatherdata.startTime+" to "+weatherdata.endTime+" 氣溫:<span class='badge rounded-pill bg-danger'>"+weatherdata.elementValue[0].value+"</span></span><br><span class='badge bg-dark'>簡短描述:</span> "+ weatherdescription.elementValue[0].value+"<br>==========================><br><br>";
+        innerb.innerHTML+="<span class='badge bg-dark'> <img src='./image/"+ weatherimg+"' width='35' height='35'>"+"平均氣溫:<span class='badge rounded-pill bg-danger'>"+weatherdata.elementValue[0].value+"</span><br>"+"日期:"+weatherdata.startTime+" to <br>"+weatherdata.endTime+"</span>";
+        innerb.innerHTML+="<br><span class='badge bg-dark'>簡短描述:</span> "+ weatherdescription.elementValue[0].value;
+        innerb.innerHTML+="<br>==========================><br><br>";
     }
     outer.innerHTML+="</div>";
     for(var i=0;i<=data[9].time.length-1;i++){
