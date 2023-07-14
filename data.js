@@ -31,6 +31,8 @@ document.getElementById('list').onchange = function() {
         lacationnum=1;
     }else if(this.value=='新竹縣'){
         lacationnum=0;
+    }else if(this.value=='合歡山'){
+        lacationnum=10;
     }
     //console.log(lacationnum);
     mainstream(lacationnum);
@@ -43,7 +45,7 @@ function mainstream(lacationnum){
     datatype:"json",
     success: function(res){
         
-        //console.log(res);
+        console.log(res);
         data = res.records.locations[0].location[lacationnum].weatherElement;
         data1 = res.records.locations[0].location;
         //console.log(res.records.locations[0].location[lacationnum].locationName);
@@ -61,6 +63,7 @@ function nowweather(lacationnum){
     method: "GET",
     datatype:"json",
     success: function(res){
+        
         var sitenumber=101;
         if(lacationnum==6){
             sitenumber=111;
@@ -82,8 +85,11 @@ function nowweather(lacationnum){
             sitenumber=35;
         }else if(lacationnum==0){
             sitenumber=35;
+        }else if(lacationnum==10){
+            sitenumber=38;
         }
-        //console.log(res);
+
+        console.log(res);
         nowdata=res.records.location[sitenumber];
         const element = document.getElementById("tableinner");
         element.remove();
@@ -119,7 +125,7 @@ function updateweather(){
     innerb=document.querySelector('#ele');
     for(var i=0;i<=data[1].time.length-1;i++){
         var weatherdata=data[1].time[i];
-        console.log(data[1].time.length);
+        //console.log(data[1].time.length);
         var weatherdescription=data[10].time[i];
         var weatherimg="";
         if(weatherdescription.elementValue[0].value.indexOf("晴時多雲")!=-1){
@@ -144,7 +150,7 @@ function updateweather(){
         xValues3.push(data[9].time[i].startTime.substr(8, 5)+" to "+weatherdata.endTime.substr(8, 5));
         yValues3.push(data[9].time[i].elementValue[0].value);
     }
-    console.log(yValues3);
+    //console.log(yValues3);
     for(var i=0;i<=data[12].time.length-1;i++){
         xValues1.push(data[12].time[i].startTime.substr(8, 5)+" to "+weatherdata.endTime.substr(8, 5));
         yValues1.push(data[12].time[i].elementValue[0].value);
@@ -312,7 +318,7 @@ function charting(){
             }
         });
     }else{
-        console.log("change"+flag);
+        //console.log("change"+flag);
         myChart.data.datasets[0].data=yValues;
         myChart.update();
         myChart2.data.datasets[0].data=yValues1;
