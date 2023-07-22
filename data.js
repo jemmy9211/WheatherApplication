@@ -141,9 +141,12 @@ function updateweather(){
         }
         yValues.push(weatherdata.elementValue[0].value);
         xValues.push(weatherdata.startTime.substr(8, 5)+" to "+weatherdata.endTime.substr(8, 5));
-        innerb.innerHTML+="<span class='badge bg-dark'> <img src='./image/"+ weatherimg+"' width='35' height='35'>"+"平均氣溫:<span class='badge rounded-pill bg-danger'>"+weatherdata.elementValue[0].value+"</span><br>"+"日期:"+weatherdata.startTime+" to <br>"+weatherdata.endTime+"</span>";
-        innerb.innerHTML+="<br><span class='badge bg-dark'>簡短描述:</span> "+ weatherdescription.elementValue[0].value;
-        innerb.innerHTML+="<br>==========================><br><br>";
+        innerb.innerHTML+="<div class='container pt-3 pb-3 bg-dark text-white border border-light border-4'>\
+        <span class='badge bg-light text-black'><img src='./image/"+ weatherimg+"' width='35' height='35'>"
+        +"平均氣溫:<span class='badge rounded-pill bg-danger'>"+weatherdata.elementValue[0].value+"</span>\
+        <br>"+"日期:"+weatherdata.startTime+" to <br>"+weatherdata.endTime+"</span>"+"<br>\
+        <span class='badge bg-light text-black'>簡短描述:</span> "+ weatherdescription.elementValue[0].value+
+        "<br></div>";
     }
     outer.innerHTML+="</div>";
     for(var i=0;i<=data[9].time.length-1;i++){
